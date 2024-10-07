@@ -1,9 +1,17 @@
+import { useState } from 'react';
 import Header from "./components/Header/Header";
 import { CORE_CONCEPTS } from "./data";
 import CoreConcepts from "./components/CoreConcepts";
 import TabButton from "./components/TabButton";
 
 function App() {
+  const [selectedTopic, setSelectedTopic] = useState('Please click a button');
+
+  function handleSelect(selectedButton) {
+    setSelectedTopic(selectedButton);
+    console.log(selectedTopic)
+  }
+
   return (
     <div>
       <Header />
@@ -19,11 +27,12 @@ function App() {
         <section id="examples">
           <h3>Examples</h3>
           <menu>
-            <TabButton>Components</TabButton>
-            <TabButton>Jsx</TabButton>
-            <TabButton>Props</TabButton>
-            <TabButton>State</TabButton>
+            <TabButton onSelect={() => handleSelect("compomnents")}>Components</TabButton>
+            <TabButton onSelect={() => handleSelect("jsx")}>Jsx</TabButton>
+            <TabButton onSelect={() => handleSelect("props")}>Props</TabButton>
+            <TabButton onSelect={() => handleSelect("state")}>State</TabButton>
           </menu>
+          {selectedTopic}
         </section>
       </main>
     </div>
